@@ -1,0 +1,145 @@
+//THIS CODE IS INCOMPLETE
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+//---------------FUNCTION: Winnings!!!-----------------------
+double ComputeWinnings(int slot) {
+   double prizeMoney = 0.0;
+	const double PRIZE0 = 100.0;
+	const double PRIZE1 = 500.0;
+	const double PRIZE2 = 1000.0;
+	const double PRIZE3 = 0.0;
+	const double PRIZE4 = 10000.0;
+	const double PRIZE5 = 0.0;
+	const double PRIZE6 = 1000.0;
+	const double PRIZE7 = 500.0;
+	const double PRIZE8 = 100.0;
+
+	if (slot == 0) { prizeMoney = PRIZE0; }
+	else if (slot == 1) { prizeMoney = PRIZE1; }
+	else if (slot == 2) { prizeMoney = PRIZE2; }
+	else if (slot == 3) { prizeMoney = PRIZE3; }
+	else if (slot == 4) { prizeMoney = PRIZE4; }
+	else if (slot == 5) { prizeMoney = PRIZE5; }
+	else if (slot == 6) { prizeMoney = PRIZE6; }
+	else if (slot == 7) { prizeMoney = PRIZE7; }
+	else if (slot == 8) { prizeMoney = PRIZE8; }
+
+return prizeMoney;  
+}
+//---------------END WINNINGS!!!-----------------------------
+//---------------FUNCTION: One Chip Falling------------------
+  double single_chip(int slot_number, int chip_number)
+{
+       double location = slot_number;
+       const int START = 0;
+       const int SLOT_8 = 8;
+       const int END = 12;
+       const int START_CHIP = 1;
+       const double JUMP = 0.5;
+       const int RIGHT = 1;
+       srand(42);
+      
+ 
+       if (slot_number >= START && slot_number <= SLOT_8) //for loop to simulate random falling of chip
+       {
+              
+              for (int i = START; i < END; i++) // simulate chip drop
+              {
+ 
+                      double random = rand() % 2;
+                      if (random < RIGHT)
+                      {
+                             location = location + JUMP;
+                      }
+                      else
+                      {
+                             location = location - JUMP;
+                      }
+                      if (location < START)
+                      {
+                             location = JUMP;
+                      }
+                      else if (location > SLOT_8)
+                      {
+                             location = SLOT_8 - JUMP;
+                      }
+                      
+              }
+ 
+ 
+       }
+ 
+ 
+       return location;
+}
+
+
+
+//---------------END ONE CHIP FALLING------------------------
+//---------------FUNCTION: Multiple Chips--------------------
+
+
+
+//---------------END MULTIPLE CHIPS--------------------------
+//---------------FUNCTION: Main Function---------------------
+int main () {
+   
+   cout << "Welcome to the plinko simulator!" << endl;
+   
+   
+   int menuRun = 1;
+	while (menuRun == 1) {
+	   //Main menu text
+	   cout << endl;
+	   cout << "MENU: Please select one of the following options:" << endl;
+	   cout << endl;
+	   cout << "0 - Quit the program\n1 - Drop a single chip into one slot\n2 - Drop multiple chips into one slot\n3 - Drop multiple chips into each slot\n";  
+      cout << endl;
+      cout << "Enter your selection now: " << endl;
+      
+      int userMenuSelection = 0;
+      //GET USER SELECTION FOR MAIN MENU
+      cin  >> userMenuSelection;
+      
+      //Drop One
+      if (userMenuSelection == 1) {
+         int finalSlot = 0;
+         int startSlot = 0;
+         const int ONE_CHIP = 1;
+         cout << "*** DROP SINGLE CHIP ***" << endl;
+         cout << endl;
+         cout << "Which slot do you want to drop the chip(s) in (0-8)? " << endl;
+         cin  >> startSlot;
+         finalSlot = single_chip(startSlot, ONE_CHIP);
+         cout << "WINNINGS: $" << ComputeWinnings(finalSlot) << ".00" <<endl;
+         
+         //FIXME Need function for single chip drop and winning output
+      }
+      //drop multiple
+      
+      
+      //QUIT MENU
+      else if (userMenuSelection == 0) {
+         cout << "GOODBYE!";
+         menuRun = 0;
+      }
+      
+      else {
+         cout << endl;
+         cout << "INVALID SELECTION.  Please enter 0, 1, 2 or 3" << endl;
+         cout << "Enter your selection now: " << endl;
+         cin  >> userMenuSelection;
+      }
+   
+	}//END OF WHILE MENURUN == 1
+   
+   return 0;
+}//END OF MAIN
+//-------------END MAIN FUNCTION-----------------------------
